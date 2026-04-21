@@ -4,21 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Patrona is a geriatric care management application. The entire app is delivered as a single self-contained `index.html` file (~230KB) that can be opened directly in a browser with no server required.
+Patrona is a geriatric care management app. The whole thing lives in a single `index.html` file (~230KB) that you can open directly in a browser, no server needed.
 
 ## Architecture
 
-The `index.html` is a bundled single-file app with this structure:
+`index.html` is a bundled single-file app. It has a few embedded `<script>` blocks that work together:
 
-- **Bootstrapper script** — A vanilla JS loader that runs on DOMContentLoaded. It reads embedded manifest data, decodes base64 assets (with optional gzip decompression via DecompressionStream), creates blob URLs, and injects them into the template HTML.
-- **`__bundler/manifest`** script tag — JSON manifest of all assets (fonts, etc.) with their MIME types and base64-encoded data.
-- **`__bundler/template`** script tag — JSON-encoded string containing the full app HTML/CSS/JS, with UUID placeholders that get replaced with blob URLs at runtime.
-- **`__bundler/ext_resources`** script tag — Maps resource IDs to UUIDs for use via `window.__resources`.
+- **Bootstrapper script**: Vanilla JS loader that fires on DOMContentLoaded. It reads the manifest, decodes base64 assets (handles gzip via DecompressionStream if needed), turns them into blob URLs, and swaps them into the template HTML.
+- **`__bundler/manifest`** script tag: JSON blob with all the assets (fonts, etc.), their MIME types, and base64-encoded data.
+- **`__bundler/template`** script tag: JSON-encoded string of the full app HTML/CSS/JS. UUIDs in the template get replaced with blob URLs at runtime.
+- **`__bundler/ext_resources`** script tag: Maps resource IDs to UUIDs, exposed as `window.__resources`.
 
-The app uses **React** with **Babel standalone** (`text/babel` script tags) for client-side JSX transformation. Scripts are re-created via `createElement` after document replacement to ensure execution, with `Babel.transformScriptTags()` called manually.
+The app runs React with Babel standalone (`text/babel` script tags) for client-side JSX transformation. After the document gets replaced, scripts are re-created with `createElement` so they actually execute, and `Babel.transformScriptTags()` gets called manually.
 
 ## Development
 
-- **No build step** — Open `index.html` directly in a browser (`file://` protocol works).
-- **No package manager or dependencies** — Everything is self-contained in the single HTML file.
-- **No test framework** is currently configured.
+- Just open `index.html` in a browser (`file://` works fine). No build step.
+- No package manager or dependencies. Everything is in the one HTML file.
+- No test framework set up yet.
