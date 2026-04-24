@@ -6,21 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Patrona is a geriatric care management platform. This repo has two parts:
 
-- **`index.html`** (root) — The marketing/landing page. A bundled single-file app (~230KB) you can open directly in a browser, no server needed. Hosted at `getpatrona.com`.
+- **`index.html`** (root) — The marketing/landing page. A single-page static site hosted at `getpatrona.com`. Loads Geist font from Google Fonts, uses `oklch()` color tokens, no JS framework.
 - **`prototype/`** — The product prototype. A multi-file React app served at `getpatrona.com/prototype`.
 
 ## Landing Page (`index.html`)
 
-A bundled single-file app with embedded `<script>` blocks:
+A standalone static HTML page with inline CSS and minimal JS (FAQ toggle, email form). Uses Geist + Geist Mono from Google Fonts. Design tokens use `oklch()` color space with a warm cream/terracotta palette. Responsive at 720px breakpoint.
 
-- **Bootstrapper script**: Vanilla JS loader that fires on DOMContentLoaded. Reads the manifest, decodes base64 assets (handles gzip via DecompressionStream if needed), turns them into blob URLs, and swaps them into the template HTML.
-- **`__bundler/manifest`** script tag: JSON blob with all the assets (fonts, etc.), their MIME types, and base64-encoded data.
-- **`__bundler/template`** script tag: JSON-encoded string of the full app HTML/CSS/JS. UUIDs in the template get replaced with blob URLs at runtime.
-- **`__bundler/ext_resources`** script tag: Maps resource IDs to UUIDs, exposed as `window.__resources`.
+Sections: sticky nav, hero with app preview mock, feature list (numbered, with "In prototype" / "In design" status), who-it's-for, about (key/value grid), FAQ (expandable), footer.
 
-The app runs React with Babel standalone (`text/babel` script tags) for client-side JSX transformation. After the document gets replaced, scripts are re-created with `createElement` so they actually execute, and `Babel.transformScriptTags()` gets called manually.
-
-Just open `index.html` in a browser (`file://` works fine). No build step, no package manager.
+Just open `index.html` in a browser. No build step, no package manager, no dependencies beyond Google Fonts.
 
 ## Prototype App (`prototype/`)
 
