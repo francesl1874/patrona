@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Patrona is a geriatric care management platform. This repo has two parts:
 
 - **`index.html`** (root) — The marketing/landing page. A single-page static site hosted at `getpatrona.com`. Loads Geist font from Google Fonts, uses `oklch()` color tokens, no JS framework.
-- **`prototype/`** — The product prototype. A multi-file React app served at `getpatrona.com/prototype`.
+- **`demo/`** — The product prototype. A multi-file React app served at `getpatrona.com/demo`.
 
 ## Landing Page (`index.html`)
 
@@ -17,7 +17,7 @@ Sections: sticky nav, hero with app preview mock, feature list (numbered, with "
 
 Just open `index.html` in a browser. No build step, no package manager, no dependencies beyond Google Fonts.
 
-## Prototype App (`prototype/`)
+## Prototype App (`demo/`)
 
 A single-page React app (React 18 + Babel Standalone, JSX transpiled client-side). No build step or bundler.
 
@@ -28,9 +28,9 @@ cd demo && node server.js
 # open http://localhost:8080
 ```
 
-`server.js` serves static files and proxies `/api/generate` to the Anthropic API. Opening `prototype/index.html` directly via `file://` will fail because browsers block local script loading.
+`server.js` serves static files and proxies `/api/generate` to the Anthropic API. Opening `demo/index.html` directly via `file://` will fail because browsers block local script loading.
 
-### Script load order (defined in `prototype/index.html`)
+### Script load order (defined in `demo/index.html`)
 
 1. `data.jsx` — Client personas, transcript scripts, mock AI outputs. All exported to `window.*`.
 2. `ai.jsx` — AI generation layer. `window.patronaGenerate(flow, payload)`.
@@ -43,4 +43,4 @@ cd demo && node server.js
 
 ### Styling
 
-All styles in `prototype/styles.css`. Uses `oklch()` color tokens. Four theme variants (terracotta, sage, indigo, plum) via `[data-theme]` attribute. Responsive down to 320px (breakpoint at 768px).
+All styles in `demo/styles.css`. Uses `oklch()` color tokens. Four theme variants (terracotta, sage, indigo, plum) via `[data-theme]` attribute. Responsive down to 320px (breakpoint at 768px).
