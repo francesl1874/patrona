@@ -678,7 +678,7 @@ const ClientNotesView = ({ client }) => {
         // Mock mode — use hardcoded data with a small delay
         await new Promise(r => setTimeout(r, 1400));
         setGenerated(mockGenerated || {
-          caseNote: 'Visit note generated from your observations. Review and approve before saving.',
+          bullets: ['Visit note generated from your observations. Review and approve before saving.'],
           todos: [{ text: 'Follow up on observations from visit', priority: 'med' }],
         });
       }
@@ -752,9 +752,11 @@ const ClientNotesView = ({ client }) => {
                   <button className="btn sm primary"><Icon name="check" size={12} /> Approve</button>
                 </div>
               </div>
-              <div className="ai-block" style={{fontSize: 13.5, lineHeight: 1.6, fontFamily: 'var(--serif)', color: 'var(--ink-2)'}}>
-                {generated.caseNote}
-              </div>
+              <ul style={{margin: 0, paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 5}}>
+                {(generated.bullets || []).map((b, i) => (
+                  <li key={i} style={{fontSize: 13.5, lineHeight: 1.6, fontFamily: 'var(--serif)', color: 'var(--ink-2)'}}>{b}</li>
+                ))}
+              </ul>
             </div>
             <div style={{padding: '18px 20px'}}>
               <div style={{fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 10}}>

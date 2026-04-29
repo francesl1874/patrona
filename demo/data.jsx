@@ -252,7 +252,12 @@ const POST_VISIT_NOTES = {
 
 const VISIT_GENERATED = {
   margaret: {
-    caseNote: 'Home visit with Margaret Okafor (Apr 12). Margaret was alert and conversational. Reviewed medication organizer. Adherence improved since last visit. Noted loose bathroom mat near tub, recommended immediate removal or replacement with non-slip alternative. Kitchen clean, fridge well-stocked. Dana stopped by during visit and confirmed she\'s been driving Margaret to PT twice weekly. Overall stable, but bathroom safety remains a concern pending grab bar installation.',
+    bullets: [
+      'Margaret was alert and conversational; medication adherence has improved since the last visit.',
+      'Loose bathroom mat noted near the tub, recommended immediate removal or replacement with a non-slip option.',
+      'Dana confirmed she has been driving Margaret to PT twice weekly; kitchen clean and fridge well-stocked.',
+      'Overall stable; bathroom safety remains a concern pending grab bar installation.',
+    ],
     todos: [
       { text: 'Replace loose bathroom mat with non-slip alternative', priority: 'high' },
       { text: 'Follow up on grab bar installation timeline', priority: 'high' },
@@ -261,7 +266,12 @@ const VISIT_GENERATED = {
     ],
   },
   arthur: {
-    caseNote: 'Visit to Arthur at Lakeside Manor (Apr 16). Arthur in good spirits but favoring left foot, likely gout flare, staff already aware and monitoring. Reviewed medication timing with floor nurse; all doses on schedule. Room clean and well-kept. Arthur mentioned missing his garden. Explored raised bed option with Lakeside activities director, who is receptive. Skipped two chair exercise sessions last week; nurse attributes to foot discomfort. Weight stable at 184.0 lb. INR within target.',
+    bullets: [
+      'Arthur was alert and in good spirits but favoring his left foot, consistent with a possible gout flare; facility staff are aware and monitoring.',
+      'Medication timing reviewed with the floor nurse, all doses on schedule; weight stable at 184 lb and INR within target.',
+      'Skipped two chair exercise sessions last week, attributed to foot discomfort.',
+      'Raised garden bed option discussed with the Lakeside activities director, who is receptive to the idea.',
+    ],
     todos: [
       { text: 'Check with Dr. Monteiro on gout flare management', priority: 'high' },
       { text: 'Follow up with Lakeside re: raised garden bed proposal', priority: 'med' },
@@ -270,7 +280,12 @@ const VISIT_GENERATED = {
     ],
   },
   vivian: {
-    caseNote: 'Home visit with Vivian Park (Apr 14). Glucose log reviewed. Readings mostly 110–130 range, well controlled on current Metformin dose. Vivian seemed cheerful, showed me a watercolor painting from Wednesday class. Hip pain manageable with acetaminophen, not limiting daily walks with Helen. Helen reports mom is sleeping better since sertraline adjustment last month. Discussed upcoming TSH recheck with Dr. Patel. Overall impression: stable and engaged.',
+    bullets: [
+      'Glucose readings mostly 110 to 130, well controlled on the current Metformin dose.',
+      'Hip pain remains manageable with acetaminophen and is not limiting her daily walks with Helen.',
+      'Helen reports Vivian has been sleeping better since the sertraline adjustment last month.',
+      'Cheerful visit; Vivian showed a watercolor painting from Wednesday class and appeared socially engaged.',
+    ],
     todos: [
       { text: 'Confirm TSH lab appointment for May 15', priority: 'med' },
       { text: 'Send glucose log summary to Dr. Patel before next visit', priority: 'med' },
@@ -278,7 +293,12 @@ const VISIT_GENERATED = {
     ],
   },
   harold: {
-    caseNote: 'Discharge planning visit at rehab facility (Apr 18). Harold is weight-bearing with walker, making good progress per PT team. Pain controlled at 3/10 with oxycodone but taper plan begins Apr 28, will transition to acetaminophen only. Parkinson\'s tremor slightly more pronounced since surgery; neurology follow-up needed. Main discharge concern: 2nd floor walk-up apartment is not feasible short-term. Discussed three options with family: temporary relocation to nephew\'s guest room, stair lift installation ($3,200–4,500 estimate), or short-term assisted living. Family leaning toward temp relocation + stair lift install during that period.',
+    bullets: [
+      'Harold is weight-bearing with a walker and making good progress per the PT team; pain controlled at 3/10.',
+      'Oxycodone taper begins Apr 28, transitioning to acetaminophen only.',
+      'Parkinson\'s tremor is slightly more pronounced since surgery and warrants a neurology follow-up.',
+      'Family is leaning toward temporary relocation to the nephew\'s home while a stair lift is installed at the apartment.',
+    ],
     todos: [
       { text: 'Confirm temporary relocation plan with nephew Sarah Jensen', priority: 'high' },
       { text: 'Get stair lift installation quotes, schedule for May', priority: 'high' },

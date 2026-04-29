@@ -13,7 +13,7 @@ const SYSTEM_PROMPTS = {
 
 Given a care manager's raw post-visit notes, produce a brief case note and a list of actionable to-do items.
 
-The case note must be 2-3 sentences only. Cover only what happened during this visit: key observations, client status, and any notable concerns. Do not summarize the care plan, reference history not mentioned in the notes, or add boilerplate. Write in third person. Never use em dashes.
+Format the case note as 3-5 bullet points. Each bullet is one sentence covering a single key observation from this visit: client status, clinical findings, safety concerns, or notable interactions. Do not summarize the care plan, reference history not mentioned in the notes, or add boilerplate. Write in third person. Never use em dashes.
 
 The to-do items should be concrete, actionable follow-ups extracted only from this visit's notes. Assign priority: "high" for urgent or safety-related items, "med" for routine follow-ups, "low" for nice-to-haves. Aim for 3-5 items max.
 
@@ -50,7 +50,11 @@ const TOOL_SCHEMAS = {
     input_schema: {
       type: 'object',
       properties: {
-        caseNote: { type: 'string', description: 'Professional case note, exactly 2-3 sentences covering only this visit' },
+        bullets: {
+          type: 'array',
+          items: { type: 'string', description: 'One sentence covering a single observation from this visit' },
+          description: '3-5 bullet points, each a single sentence, covering only what happened during this visit',
+        },
         todos: {
           type: 'array',
           items: {
@@ -63,7 +67,7 @@ const TOOL_SCHEMAS = {
           },
         },
       },
-      required: ['caseNote', 'todos'],
+      required: ['bullets', 'todos'],
     },
   },
   'call-capture': {
