@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const API_KEY = process.env.ANTHROPIC_API_KEY || '';
 
 const MIME = {

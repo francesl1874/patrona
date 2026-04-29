@@ -1,9 +1,14 @@
 // ai.jsx — AI generation layer (Claude API via proxy)
 
+const _isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
 window.PATRONA_CONFIG = {
-  apiUrl: '/api/generate',
-  useMockData: true,           // global default — flip to false to hit real Claude for every flow
-  realFlows: ['visit-note'],   // flows that bypass useMockData and always call real Claude (when proxy has API key)
+  apiUrl: _isLocal
+    ? '/api/generate'
+    : 'REPLACE_WITH_RAILWAY_URL/api/generate',
+  useMockData: true,
+  realFlows: ['visit-note'],   // flows eligible for real Claude
+  liveClients: ['harold'],     // clients that get real Claude in production (others stay on mock)
 };
 
 // ============ SYSTEM PROMPTS ============
@@ -221,10 +226,12 @@ function buildUserMessage(flow, payload) {
 window.patronaGenerate = async function(flow, payload) {
   const config = window.PATRONA_CONFIG;
 
-  // realFlows only apply on localhost — production has no API proxy.
   const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-  const useMock = !(isLocal && config.realFlows?.includes(flow)) && config.useMockData;
-  if (useMock) {
+  const isLiveClient = config.liveClients?.includes(payload?.client?.id);
+  const isRealFlow = config.realFlows?.includes(flow);
+
+  // Real Claude on localhost (any realFlow) or production (liveClients + realFlow only).
+  if (!isRealFlow || (!isLocal && !isLiveClient)) {
     return null;
   }
 
